@@ -6,6 +6,16 @@
 //  Copyright © 2019 Invading Octopus. Licensed under Apache License v2.0 (see LICENSE.txt)
 //
 
+//  These OS-specific "view modifier modifiers" reduce code duplication in cases when you have a view that has multiple universal (OS-agnostic) view modifiers but 1 OS-specific view modifier, such as `.onCommand(_:perform:)` for macOS menus or `onPlayPauseCommand(perform:)` for the Apple TV Remote.
+//
+//  With these modifiers, you can avoid `#if os(...)` blocks or creating OS-specific copies of entire views:
+//
+//  Rectangle()
+//      .padding() // For all systems.
+//      .iOS   { $0.foregroundColor(.green) }
+//      .macOS { $0.foregroundColor(.blue) }
+//      .tvOSExcluded { $0.onTapGesture { self.dance() } } // tvOS doesn't have tap gestures.
+
 import SwiftUI
 
 public extension View {
@@ -14,7 +24,7 @@ public extension View {
     ///
     /// **Example**: `.iOS { $0.foregroundColor(.green) }`
     @inlinable
-    func iOS <ModifiedViewType: View> (_ modifier: (Self) -> ModifiedViewType) -> some View {
+    func iOS <ModifiedViewType: View> (modifier: (Self) -> ModifiedViewType) -> some View {
         #if os(iOS)
         return modifier(self)
         #else
@@ -26,7 +36,7 @@ public extension View {
     ///
     /// **Example**: `.iOSExcluded { $0.foregroundColor(.red) }`
     @inlinable
-    func iOSExcluded <ModifiedViewType: View> (_ modifier: (Self) -> ModifiedViewType) -> some View {
+    func iOSExcluded <ModifiedViewType: View> (modifier: (Self) -> ModifiedViewType) -> some View {
         #if !os(iOS)
         return modifier(self)
         #else
@@ -38,7 +48,7 @@ public extension View {
     ///
     /// **Example**: `.macOS { $0.onCommand(save, perform: saveFile) }`
     @inlinable
-    func macOS <ModifiedViewType: View> (_ modifier: (Self) -> ModifiedViewType) -> some View {
+    func macOS <ModifiedViewType: View> (modifier: (Self) -> ModifiedViewType) -> some View {
         #if os(macOS)
         return modifier(self)
         #else
@@ -50,7 +60,7 @@ public extension View {
     ///
     /// **Example**: `.macOSExcluded { $0.foregroundColor(.red) }`
     @inlinable
-    func macOSExcluded <ModifiedViewType: View> (_ modifier: (Self) -> ModifiedViewType) -> some View {
+    func macOSExcluded <ModifiedViewType: View> (modifier: (Self) -> ModifiedViewType) -> some View {
         #if !os(macOS)
         return modifier(self)
         #else
@@ -62,7 +72,7 @@ public extension View {
     ///
     /// **Example**: `.tvOS { $0.focusable() }`
     @inlinable
-    func tvOS <ModifiedViewType: View> (_ modifier: (Self) -> ModifiedViewType) -> some View {
+    func tvOS <ModifiedViewType: View> (modifier: (Self) -> ModifiedViewType) -> some View {
         #if os(tvOS)
         return modifier(self)
         #else
@@ -74,7 +84,7 @@ public extension View {
     ///
     /// **Example**: `.tvOSExcluded { $0.foregroundColor(.red) }`
     @inlinable
-    func tvOSExcluded <ModifiedViewType: View> (_ modifier: (Self) -> ModifiedViewType) -> some View {
+    func tvOSExcluded <ModifiedViewType: View> (modifier: (Self) -> ModifiedViewType) -> some View {
         #if !os(tvOS)
         return modifier(self)
         #else
@@ -86,7 +96,7 @@ public extension View {
     ///
     /// **Example**: `.watchOS { $0.foregroundColor(.green) }`
     @inlinable
-    func watchOS <ModifiedViewType: View> (_ modifier: (Self) -> ModifiedViewType) -> some View {
+    func watchOS <ModifiedViewType: View> (modifier: (Self) -> ModifiedViewType) -> some View {
         #if os(watchOS)
         return modifier(self)
         #else
@@ -98,7 +108,7 @@ public extension View {
     ///
     /// **Example**: `.watchOSExcluded { $0.foregroundColor(.red) }`
     @inlinable
-    func watchOSExcluded <ModifiedViewType: View> (_ modifier: (Self) -> ModifiedViewType) -> some View {
+    func watchOSExcluded <ModifiedViewType: View> (modifier: (Self) -> ModifiedViewType) -> some View {
         #if !os(watchOS)
         return modifier(self)
         #else
