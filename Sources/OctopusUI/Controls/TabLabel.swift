@@ -1,6 +1,6 @@
 //
 //  TabLabel.swift
-//  OctopusKit-SwiftUI
+//  OctopusUI
 //
 //  Created by ShinryakuTako@invadingoctopus.io on 2019/9/16.
 //  Copyright © 2019 Invading Octopus. Licensed under Apache License v2.0 (see LICENSE.txt)
