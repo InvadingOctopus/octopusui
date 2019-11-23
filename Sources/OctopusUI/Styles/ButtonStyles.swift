@@ -1,6 +1,7 @@
 //
 //  OctopusKitQuickStart.swift
 //  OctopusUI
+//  https://github.com/InvadingOctopus/octopusui
 //
 //  Created by ShinryakuTako@invadingoctopus.io on 2019/11/3.
 //  Copyright © 2019 Invading Octopus. Licensed under Apache License v2.0 (see LICENSE.txt)
