@@ -20,6 +20,17 @@ public struct CycleButton<EnumType>: View
     
     public var prefix: String? = nil
     public var suffix: String? = nil
+
+    public init(selection:  Binding<EnumType>,
+                options:    [EnumType],
+                prefix:     String? = nil,
+                suffix:     String? = nil)
+    {
+        self._selection = selection
+        self.options    = options
+        self.prefix     = prefix
+        self.suffix     = suffix
+    }
     
     public var body: some View {
         Button(action: cycle) {

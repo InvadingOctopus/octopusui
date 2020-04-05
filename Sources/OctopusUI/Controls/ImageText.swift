@@ -18,10 +18,21 @@ import SwiftUI
 /// Displays an `HStack` with an `Image` for the specified SF Symbol and `Text`.
 public struct ImageText: View {
     
-    public var systemName: String
-    public var imageScale: Image.Scale = .large
-    public var label: String
-    public var font: Font? = nil
+    public var systemName:      String
+    public var imageScale:      Image.Scale = .large
+    public var label:           String
+    public var font:            Font? = nil
+
+    public init(systemName:     String,
+                  imageScale:   Image.Scale = .large,
+                  label:        String,
+                  font:         Font? = nil)
+    {
+        self.systemName = systemName
+        self.imageScale = imageScale
+        self.label      = label
+        self.font       = font
+    }
     
     public var body: some View {
         HStack(alignment: .center) {
@@ -41,10 +52,10 @@ public struct ImageText: View {
     }
 }
 
-extension HorizontalAlignment {
+public extension HorizontalAlignment {
 
-    private enum ImageText: AlignmentID {
-        static func defaultValue(in context: ViewDimensions) -> CGFloat {
+    enum ImageText: AlignmentID {
+        public static func defaultValue(in context: ViewDimensions) -> CGFloat {
             context[HorizontalAlignment.center]
         }
     }

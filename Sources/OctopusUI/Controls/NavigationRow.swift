@@ -17,9 +17,20 @@ import SwiftUI
 public struct NavigationRow<Destination> : View where Destination: View  {
     
     public var destination: Destination
-    public var imageName: String
-    public var imageScale: Image.Scale = .large
-    public var label: String
+    public var imageName:   String
+    public var imageScale:  Image.Scale = .large
+    public var label:       String
+
+    public init(destination: Destination,
+                imageName:  String,
+                imageScale: Image.Scale = .large,
+                label:      String)
+    {
+        self.destination    = destination
+        self.imageName      = imageName
+        self.imageScale     = imageScale
+        self.label          = label
+    }
     
     public var body: some View {
         NavigationLink(destination: destination) {

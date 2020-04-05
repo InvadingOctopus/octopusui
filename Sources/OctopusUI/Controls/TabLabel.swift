@@ -15,11 +15,22 @@ import SwiftUI
 
 /// Displays a `Group` with an SF Symbol `Image` and a `Text` label. Useful for quickly setting the label of a `TabView` tab.
 public struct TabLabel: View {
+        
+    public var imageName:   String
+    public var imageScale:  Image.Scale = .large
+    public var text:        String
+    public var font:        Font = .headline
     
-    public var imageName: String
-    public var imageScale: Image.Scale = .large
-    public var text: String
-    public var font: Font = .headline
+    public init(imageName:  String,
+                imageScale: Image.Scale = .large,
+                text:       String,
+                font:       Font = .headline)
+    {
+        self.imageName  = imageName
+        self.imageScale = imageScale
+        self.text       = text
+        self.font       = font
+    }
     
     public var body: some View {
         Group {

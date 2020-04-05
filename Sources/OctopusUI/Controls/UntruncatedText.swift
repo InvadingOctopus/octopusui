@@ -13,9 +13,10 @@ import SwiftUI
 
 /// A `Text` view with a `lineLimit` of `100` and a `fixedSize` modifier.
 public struct UntruncatedText: View {
+    
     public var text: String
     
-    init(_ text: String) {
+    public init(_ text: String) {
         self.text = text
     }
     
