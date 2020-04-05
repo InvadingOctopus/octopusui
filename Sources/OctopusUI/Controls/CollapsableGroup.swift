@@ -13,12 +13,11 @@ import SwiftUI
 public struct CollapsableGroup <Content, Label >: View
     where Content: View, Label: View
 {
-    
     public var label: Label
     public var content: () -> Content
     
     @State private var collapsed: Bool = false
-    
+
     public init(label: Label,
                 @ViewBuilder content: @escaping () -> Content)
     {
