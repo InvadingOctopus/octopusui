@@ -27,7 +27,7 @@ public struct UntruncatedText: View {
     }
 }
 
-struct NontruncatedText_Previews: PreviewProvider {
+struct UntruncatedText_Previews: PreviewProvider {
     static var previews: some View {
         UntruncatedText("beep boop")
     }
