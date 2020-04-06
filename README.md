@@ -1,6 +1,6 @@
 # OctopusUI 🐙🎛
 
-A collection of SwiftUI controls and extensions.
+A collection of custom SwiftUI controls and extensions.
 
 May be used in conjunction with the [OctopusKit game engine][octopuskit] or in any standalone SwiftUI application.
 
