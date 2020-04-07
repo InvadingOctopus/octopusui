@@ -56,10 +56,20 @@ public struct CollapsableGroup <Content, Label >: View
                 
                 Spacer()
                 
+                #if canImport(AppKit)
+                
+                chevron
+                    .rotationEffect(.degrees(collapsed ? 0 : 90))
+                    .padding(.horizontal)
+                
+                #elseif canImport(UIKit)
+                
                 chevron
                     .rotationEffect(.degrees(collapsed ? 0 : 90))
                     .imageScale(.large)
                     .padding(.horizontal)
+                
+                #endif
             }
         }
     }
