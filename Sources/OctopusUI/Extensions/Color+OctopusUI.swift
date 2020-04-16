@@ -11,6 +11,9 @@ import SwiftUI
 
 public extension SwiftUI.Color {
     
+    static let cyan     = Self.init(red: 0,     green: 1.0, blue: 1.0)
+    static let magenta  = Self.init(red: 1.0,   green: 0,   blue: 1.0)
+    
     /// Returns a random `Color` from the list of preset colors (as of 2019/10/23), **excluding** `clear`, `primary`, `secondary` and `accentColor`.
     static var random: Color {
         // NOTE: This must be a COMPUTED property! Assigning a value makes this a static variable, which will always be the first color it got. :)
