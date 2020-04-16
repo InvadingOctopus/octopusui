@@ -13,9 +13,12 @@ public struct FatButtonStyle: ButtonStyle {
     
     public var color: Color
     
+    public init(color: Color = .accentColor) {
+        self.color = color
+    }
+    
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            
             .foregroundColor(.white)
             .padding()
             .background(RoundedRectangle(cornerRadius: 10)
@@ -26,12 +29,11 @@ public struct FatButtonStyle: ButtonStyle {
                         radius: configuration.isPressed ? 5 : 10,
                         x: 0,
                         y: configuration.isPressed ? -2 : -10))
-            .padding()
     }
 }
 
 /// Preview in live mode to test interactivity and animations.
-struct ButtonStyle_Previews: PreviewProvider {
+struct FatButtonStyle_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20) {
             ForEach(0..<3) { _ in
