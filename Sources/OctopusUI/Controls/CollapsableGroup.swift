@@ -10,7 +10,7 @@
 import SwiftUI
 
 /// Displays a stack that can be collapsed/uncollapsed by clicking on a chevron in the label. Useful for displaying optional controls in lists.
-public struct CollapsableGroup <Content, Label >: View
+public struct CollapsableGroup <Content, Label> : View
     where Content: View, Label: View
 {
     public var label: Label
