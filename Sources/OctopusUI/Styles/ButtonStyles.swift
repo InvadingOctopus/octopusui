@@ -1,5 +1,5 @@
 //
-//  OctopusKitQuickStart.swift
+//  ButtonStyles.swift
 //  OctopusUI
 //  https://github.com/InvadingOctopus/octopusui
 //
@@ -11,24 +11,29 @@ import SwiftUI
 
 public struct FatButtonStyle: ButtonStyle {
     
-    public var color: Color
+    public var color:       Color
+    public var opacity:     Double
     
-    public init(color: Color = .accentColor) {
-        self.color = color
+    public init(color:      Color  = .accentColor,
+                opacity:    Double = 0.85)
+    {
+        self.color          = color
+        self.opacity        = opacity
     }
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundColor(.white)
             .padding()
-            .background(RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(color)
-                .opacity(0.85)
-                .brightness(configuration.isPressed ? 0.2 : 0)
-                .shadow(color: .black,
-                        radius: configuration.isPressed ? 5 : 10,
-                        x: 0,
-                        y: configuration.isPressed ? -2 : -10))
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(color)
+                    .opacity(opacity)
+                    .shadow(color: .black,
+                            radius: configuration.isPressed ? 5 : 10,
+                            x: 0,
+                            y: configuration.isPressed  ? -2  : -5)
+                    .brightness(configuration.isPressed ? 0.2 : 0)
+                    .animation(.easeOut(duration: 0.1)))
     }
 }
 
