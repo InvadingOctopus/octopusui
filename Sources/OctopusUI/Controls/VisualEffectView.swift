@@ -50,7 +50,7 @@ struct VisualEffectView_Previews: PreviewProvider {
     }
 }
 
-#elseif canImport(UIKit)
+#elseif os(iOS) // .systemMaterial is unavailable in tvOS
 
 /// Encapsulates a `UIVisualEffectView` for blur and transparency effects.
 public struct VisualEffectView: UIViewRepresentable {
