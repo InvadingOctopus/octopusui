@@ -13,17 +13,20 @@ public struct FatButtonStyle: ButtonStyle {
     
     public var color:       Color
     public var opacity:     Double
+    public var padding:     CGFloat?
     
-    public init(color:      Color  = .accentColor,
-                opacity:    Double = 0.85)
+    public init(color:      Color       = .accentColor,
+                opacity:    Double      = 0.85,
+                padding:    CGFloat?    = nil)
     {
         self.color          = color
         self.opacity        = opacity
+        self.padding        = padding
     }
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding()
+            .padding(.all, self.padding)
             .background(
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(color)
