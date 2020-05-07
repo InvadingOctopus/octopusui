@@ -11,8 +11,28 @@ import SwiftUI
 
 public extension SwiftUI.Color {
     
-    static let cyan     = Self.init(red: 0,     green: 1.0, blue: 1.0)
-    static let magenta  = Self.init(red: 1.0,   green: 0,   blue: 1.0)
+    // MARK: Spectrum
+    // Colors that are always at full saturation, not dependent on the system definitions for common colors.
+    
+    /// Red: `0`, Green: `0`, Blue: `1.0`
+    static let blueSaturated    = Self.init(red: 0.0,   green: 0.0, blue: 1.0)
+    
+    /// Red: `0`, Green: `1.0`, Blue: `1.0`
+    static let cyanSaturated    = Self.init(red: 0.0,   green: 1.0, blue: 1.0)
+    
+    /// Red: `0`, Green: `1.0`, Blue: `0`
+    static let greenSaturated   = Self.init(red: 0.0,   green: 1.0, blue: 0.0)
+    
+    /// Red: `1.0`, Green: `0`, Blue: `1.0`
+    static let magentaSaturated = Self.init(red: 1.0,   green: 0.0, blue: 1.0)
+    
+    /// Red: `1.0`, Green: `0`, Blue: `0`
+    static let redSaturated     = Self.init(red: 1.0,   green: 0.0, blue: 0.0)
+    
+    /// Red: `1.0`, Green: `1.0`, Blue: `0`
+    static let yellowSaturated  = Self.init(red: 1.0,   green: 1.0, blue: 0.0)
+    
+    // MARK: Random Colors
     
     /// Returns a random `Color` from the list of preset colors (as of 2019/10/23), **excluding** `clear`, `primary`, `secondary` and `accentColor`.
     static var random: Color {
