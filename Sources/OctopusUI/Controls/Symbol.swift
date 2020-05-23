@@ -16,11 +16,13 @@ import SwiftUI
 /// This view helps you avoid `#if` `#else` conditional compilation blocks and lets you create an SF Symbol text or image view for any OS with a single call.
 public struct Symbol: View {
     
+    // CHECK: Enforce single characters on macOS?
+    
     // https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/
     // https://developer.apple.com/design/downloads/SF-Symbols.dmg
     
     /// The string containing the symbol pasted from the SF Symbols app, like emoji.
-    let macOSText:      Character
+    let macOSText:      String
     
     /// The "system name" of the symbol.
     let iOSSystemName:  String
@@ -29,9 +31,9 @@ public struct Symbol: View {
     
     /// Creates an `Image` view on iOS/iPadOS/tvOS, or a `Text` view on macOS.
     /// - Parameters:
-    ///   - macOS: The string containing the symbol. Use Apple's SF Symbols catalog app to copy and paste symbols like any other emoji (using `⌘C` and `⌘V`).
+    ///   - macOS: The string containing the symbol(s). Use Apple's SF Symbols catalog app to copy and paste symbols like any other emoji (using `⌘C` and `⌘V`).
     ///   - iOS: The "system name" of the symbol (like `"square.and.arrow.up"` for the Share icon). Use Apple's SF Symbols catalog app to copy symbol names (using `⇧⌘C`).
-    public init(macOS:  Character,
+    public init(macOS:  String,
                 iOS:    String)
     {
         self.iOSSystemName  = iOS
@@ -51,7 +53,7 @@ public struct Symbol: View {
     ///   - macOS: The string containing the symbol(s). Use Apple's SF Symbols catalog app to copy and paste symbols like any other emoji (using `⌘C` and `⌘V`).
     ///   - iOS: The "system name" of the symbol (like `"square.and.arrow.up"` for the Share icon). Use Apple's SF Symbols catalog app to copy symbol names (using `⇧⌘C`).
     ///   - scale: The scale of the image on iOS/iPadOS/tvOS. Default: `.medium`
-    public init(macOS:  Character,
+    public init(macOS:  String,
                 iOS:    String,
                 scale:  Image.Scale = .medium)
     {
