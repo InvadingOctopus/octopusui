@@ -14,6 +14,7 @@ import SwiftUI
 #if canImport(UIKit)
 
 /// Displays a `Group` with an SF Symbol `Image` and a `Text` label. Useful for quickly setting the label of a `TabView` tab.
+@available(*, deprecated, message: "Use Label or Text-embedded Image in the latest OS versions.")
 public struct TabLabel: View {
         
     public var imageName:   String
@@ -43,6 +44,8 @@ public struct TabLabel: View {
     }
 }
 
+/* Disabled to silence deprecation warnings on newer systems.
+
 struct TabLabel_Previews: PreviewProvider {
     static var previews: some View {
         TabView {
@@ -54,5 +57,6 @@ struct TabLabel_Previews: PreviewProvider {
         }
     }
 }
+*/
 
 #endif
