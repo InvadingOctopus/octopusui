@@ -97,3 +97,18 @@ struct CollapsableGroup_Previews: PreviewProvider {
         }
     }
 }
+
+/* TODO: Enable when the Swift Package can be set to the latest OS versions.
+
+struct CollapsableGroup_LibraryContent: LibraryContentProvider {
+    @LibraryContentBuilder
+    var views: [LibraryItem] {
+        LibraryItem(
+            CollapsableGroup(label: "Group", content: {
+                Text("Content")
+            }),
+            category: .control
+        )
+    }
+}
+*/

@@ -71,3 +71,16 @@ struct AnimatedText_Previews: PreviewProvider {
         AnimatedText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
     }
 }
+
+/* TODO: Enable when the Swift Package can be set to the latest OS versions.
+
+struct AnimatedText_LibraryContent: LibraryContentProvider {
+    @LibraryContentBuilder
+    var views: [LibraryItem] {
+        LibraryItem(
+            AnimatedText("Text to animate", animationInterval: 0.015),
+            category: .control
+        )
+    }
+}
+*/
