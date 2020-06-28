@@ -10,6 +10,7 @@
 import SwiftUI
 
 /// Displays a stack that can be collapsed/uncollapsed by clicking on a chevron in the label. Useful for displaying optional controls in lists.
+@available(*, deprecated, message: "Use the native DisclosureGroup on newer operating systems.")
 public struct CollapsableGroup <Content, Label> : View
     where Content: View, Label: View
 {
@@ -85,6 +86,8 @@ public struct CollapsableGroup <Content, Label> : View
     }
 }
 
+/* Disabled to silence deprecation warnings on newer systems.
+
 /// Preview in live mode to test interactivity.
 struct CollapsableGroup_Previews: PreviewProvider {
     static var previews: some View {
@@ -97,6 +100,7 @@ struct CollapsableGroup_Previews: PreviewProvider {
         }
     }
 }
+*/
 
 /* TODO: Enable when the Swift Package can be set to the latest OS versions.
 
