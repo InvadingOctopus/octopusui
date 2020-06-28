@@ -12,7 +12,7 @@ import SwiftUI
 /// Displays an `HStack` with the specified SF Symbol and a `Text` label.
 ///
 /// - NOTE: When arranging multiple `SymbolText` views in a `VStack`, use `HorizontalAlignment.symbolText` to align symbols and labels across rows.
-@available(*, deprecated, message: "Use Label or Text-embedded Image in the latest OS versions.")
+@available(*, deprecated, message: "Use the native Label or Text-embedded Image on newer operating systems.")
 public struct SymbolText: View {
 
     // TODO: Improve image and text alignments

@@ -14,7 +14,7 @@ import SwiftUI
 /// For some stupid reasons, Apple does not let you use `image(systemName:)` on macOS, but you *can* use the SF Symbols browser/catalog/viewer app to copy symbols and paste them into any text field on macOS, just like any other emoji. However, symbols copied in that manner are not viewable on iOS.
 ///
 /// This view helps you avoid `#if` `#else` conditional compilation blocks and lets you create an SF Symbol text or image view for any OS with a single call.
-@available(*, deprecated, message: "Use Image(systemName:) or Text-embedded Image in the latest OS versions.")
+@available(*, deprecated, message: "Use the native Image(systemName:) or Text-embedded Image on newer operating systems.")
 public struct Symbol: View {
     
     // CHECK: Enforce single characters on macOS?
