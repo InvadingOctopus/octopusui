@@ -13,6 +13,8 @@
 
 import SwiftUI
 
+#if os(iOS)
+
 /// Presents a sharing sheet.
 @available(iOS 13.0, *)
 public struct ShareSheet: UIViewControllerRepresentable {
@@ -54,3 +56,5 @@ public struct ShareSheet: UIViewControllerRepresentable {
         // Not needed
     }
 }
+
+#endif

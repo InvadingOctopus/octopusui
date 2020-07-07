@@ -46,12 +46,12 @@ public struct SymbolText: View {
         HStack(alignment: .center) {
             
             Symbol(macOS: macOSText, iOS: iOSSystemName)
-                .alignmentGuide(.imageText) { dimensions in
+                .alignmentGuide(.symbolText) { dimensions in
                     dimensions[.trailing]
             }
             
             Text(label)
-                .alignmentGuide(.imageText) { dimensions in
+                .alignmentGuide(.symbolText) { dimensions in
                     dimensions[.leading]
             }
         }
