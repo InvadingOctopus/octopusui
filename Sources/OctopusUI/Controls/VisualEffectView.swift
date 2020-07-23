@@ -14,11 +14,11 @@ import SwiftUI
 /// Encapsulates an `NSVisualEffectView` for blur and transparency effects.
 public struct VisualEffectView: NSViewRepresentable {
 
-    public var material: NSVisualEffectView.Material = .appearanceBased
+    public var material: NSVisualEffectView.Material = .windowBackground
     public var blendingMode: NSVisualEffectView.BlendingMode
     public var state: NSVisualEffectView.State = .followsWindowActiveState
     
-    public init(material: NSVisualEffectView.Material = .appearanceBased,
+    public init(material: NSVisualEffectView.Material = .windowBackground,
                 blendingMode: NSVisualEffectView.BlendingMode,
                 state: NSVisualEffectView.State = .followsWindowActiveState)
     {
@@ -43,7 +43,7 @@ public struct VisualEffectView: NSViewRepresentable {
 struct VisualEffectView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            VisualEffectView(material: .appearanceBased,
+            VisualEffectView(material: .windowBackground,
                              blendingMode: .behindWindow)
             Text("VisualEffectView")
         }
