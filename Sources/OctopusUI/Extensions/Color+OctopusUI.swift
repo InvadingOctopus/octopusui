@@ -1,5 +1,5 @@
 //
-//  Color+OctopusKit.swift
+//  Color+OctopusUI.swift
 //  OctopusUI
 //  https://github.com/InvadingOctopus/octopusui
 //
