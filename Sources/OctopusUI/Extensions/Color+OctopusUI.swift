@@ -11,7 +11,19 @@ import SwiftUI
 
 public extension SwiftUI.Color {
     
-    // MARK: Spectrum
+    // MARK: All Members
+    
+    /// An array of all the predefined colors, **excluding** `clear`, `primary`, `secondary` and `accentColor`.
+    ///
+    /// The list contains all the predefine colors on iOS 17 and macOS 14.
+    static let allColors: [Self] = [
+        black,  blue,   brown,  cyan,
+        gray,   green,  indigo, mint,
+        orange, pink,   purple, red,
+        teal,   yellow, white
+    ]
+    
+    // MARK: Sinclair Spectrum
     // Colors that are always at full saturation, not dependent on the system definitions for common colors.
     
     /// Red: `0`, Green: `0`, Blue: `1.0`
@@ -34,33 +46,17 @@ public extension SwiftUI.Color {
     
     // MARK: Random Colors
     
-    /// Returns a random `Color` from the list of preset colors (as of 2019/10/23), **excluding** `clear`, `primary`, `secondary` and `accentColor`.
+    /// Returns a random `Color` from the list of predefined colors (as of 2019/10/23), **excluding** `clear`, `primary`, `secondary` and `accentColor`.
     static var random: Color {
-        // NOTE: This must be a COMPUTED property! Assigning a value makes this a static variable, which will always be the first color it got. :)
-        [black,
-         white,
-         gray,
-         red,
-         green,
-         blue,
-         orange,
-         yellow,
-         pink,
-         purple]
-            .randomElement()!
+        // NOTE: This must be a COMPUTED property! Assigning a value makes this a static variable, which will always be the first color it gets. :)
+        Self.allColors.randomElement()!
     }
     
-    /// Returns a random `Color` from the list of preset colors (as of 2019/10/23), **excluding** `black`, `white`, `clear`, `primary`, `secondary` and `accentColor`.
+    /// Returns a random `Color` from the list of preset colors, **excluding** `black` and `white`.
     static var randomExcludingBlackWhite: Color {
-        // NOTE: This must be a COMPUTED property! Assigning a value makes this a static variable, which will always be the first color it got. :)
-        [gray,
-         red,
-         green,
-         blue,
-         orange,
-         yellow,
-         pink,
-         purple]
-            .randomElement()!
+        // NOTE: This must be a COMPUTED property! Assigning a value makes this a static variable, which will always be the first color it gets. :)
+        Self.allColors.filter {
+            $0 != white && $0 != black
+        }.randomElement()!
     }
 }
