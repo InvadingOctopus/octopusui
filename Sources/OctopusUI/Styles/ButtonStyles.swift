@@ -36,23 +36,22 @@ public struct FatButtonStyle: ButtonStyle {
                             x: 0,
                             y: configuration.isPressed  ? -2  : -5)
                     .brightness(configuration.isPressed ? 0.2 : 0)
-                    .animation(.easeOut(duration: 0.1)))
+                    .animation(.easeOut(duration: 0.1), value: configuration.isPressed))
     }
 }
 
 /// Preview in live mode to test interactivity and animations.
-struct FatButtonStyle_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(spacing: 20) {
-            ForEach(0..<3) { _ in
-                Button(action: {}) {
-                    Text("Fat Button Style")
-                }
-                .buttonStyle(FatButtonStyle(color: .randomExcludingBlackWhite))
+#Preview {
+    VStack(spacing: 20) {
+        ForEach(0..<3) { _ in
+            Button(action: {}) {
+                Text("Fat Button Style")
             }
+            .buttonStyle(FatButtonStyle(color: .randomExcludingBlackWhite))
         }
-        .padding()
-        .background(Color.random)
-        .previewLayout(.sizeThatFits)
     }
+    .padding()
+    .background(Color.random)
+    .previewLayout(.sizeThatFits)
 }
+
