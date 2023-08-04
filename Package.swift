@@ -7,13 +7,14 @@ import PackageDescription
 
 let package = Package(
     name: "OctopusUI",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v17),
         .macOS(.v14),
         .tvOS(.v17)
     ],
     products: [
-        // Products define the executables and libraries produced by a package, and make them visible to other packages.
+        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "OctopusUI",
             targets: ["OctopusUI"]),
@@ -23,8 +24,8 @@ let package = Package(
         // .package(url: /* package url */, from: "1.0.0"),
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
+        // Targets are the basic building blocks of a package, defining a module or a test suite.
+        // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "OctopusUI",
             dependencies: []),
