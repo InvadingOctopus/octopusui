@@ -10,7 +10,7 @@
 import Foundation
 import SwiftUI
 
-extension String: View {
+extension String: @retroactive View {
     
     /// This extension allows a standalone `String` to be used as a `Text` view in a SwiftUI layout.
     ///

@@ -52,6 +52,5 @@ public struct FatButtonStyle: ButtonStyle {
     }
     .padding()
     .background(Color.random)
-    .previewLayout(.sizeThatFits)
 }
 
