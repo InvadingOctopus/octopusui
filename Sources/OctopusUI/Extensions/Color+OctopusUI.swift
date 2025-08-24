@@ -15,7 +15,7 @@ public extension SwiftUI.Color {
     
     /// An array of all the predefined colors, **excluding** `clear`, `primary`, `secondary` and `accentColor`.
     ///
-    /// The list contains all the predefine colors on iOS 17 and macOS 14.
+    /// The list contains all the predefined colors on iOS and macOS. Some colors may be context-dependent, i.e. different in dark mode vs. light mode etc.
     static let allColors: [Self] = [
         black,  white,  gray,
         red,    orange, yellow,
