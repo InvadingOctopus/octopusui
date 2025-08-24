@@ -6,7 +6,7 @@
 //  Created by ShinryakuTako@invadingoctopus.io on 2020/05/23.
 //  ORIGINAL: SOURCE: https://github.com/AlanQuatermain/SwiftUIShareSheetDemo/blob/master/ShareSheetDemo/ShareSheet.swift
 //  ORIGINAL: CREDIT: Copyright © 2019 Jim Dovey. All rights reserved. https://github.com/AlanQuatermain
-//  UPDATES:  2020 Invading Octopus.
+//  UPDATES:  2025 Invading Octopus.
 //
 
 // TODO: macOS version
