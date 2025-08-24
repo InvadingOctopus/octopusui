@@ -17,10 +17,11 @@ public extension SwiftUI.Color {
     ///
     /// The list contains all the predefine colors on iOS 17 and macOS 14.
     static let allColors: [Self] = [
-        black,  blue,   brown,  cyan,
-        gray,   green,  indigo, mint,
-        orange, pink,   purple, red,
-        teal,   yellow, white
+        black,  white,  gray,
+        red,    orange, yellow,
+        green,  mint,   teal,
+        cyan,   blue,   indigo,
+        purple, pink,   brown,
     ]
     
     // MARK: Sinclair Spectrum
