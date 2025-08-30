@@ -10,9 +10,9 @@
 import SwiftUI
 
 public extension SwiftUI.Color {
-    
+
     // MARK: All Members
-    
+
     /// An array of all the predefined colors, **excluding** `clear`, `primary`, `secondary` and `accentColor`.
     ///
     /// The list contains all the predefined colors on iOS and macOS. Some colors may be context-dependent, i.e. different in dark mode vs. light mode etc.
@@ -23,24 +23,17 @@ public extension SwiftUI.Color {
         cyan,   blue,   indigo,
         purple, pink,   brown,
     ]
-    
+
 
     enum Name: String, CaseIterable {
+
         case black, white,  gray,
              red,   orange, yellow,
              green, mint,   teal,
              cyan,  blue,   indigo,
-             pink,  purple, brown
-        
-        public init?(string: String) {
-            let lowercased = string.lowercased()
-            if let match = Self.allCases.first(where: { $0.rawValue.lowercased() == lowercased }) {
-                self = match
-            } else {
-                return nil
-            }
-        }
-        
+             purple,pink,   brown
+
+
         public var color: Color {
             switch self {
             case .black:  return .black
@@ -60,38 +53,53 @@ public extension SwiftUI.Color {
             case .brown:  return .brown
             }
         }
+
+
+        public static var allCasesSorted: [Self] {
+            allCases.sorted { $0.rawValue.lexicographicallyPrecedes($1.rawValue) }
+        }
+
+
+        public init?(string: String) {
+            let lowercased = string.lowercased()
+            if let match = Self.allCases.first(where: { $0.rawValue.lowercased() == lowercased }) {
+                self = match
+            } else {
+                return nil
+            }
+        }
     }
-    
-    
+
+
     // MARK: Sinclair Spectrum
     // Colors that are always at full saturation, not dependent on the system definitions for common colors.
-    
+
     /// Red: `0`, Green: `0`, Blue: `1.0`
     static let blueSaturated    = Self.init(red: 0.0,   green: 0.0, blue: 1.0)
-    
+
     /// Red: `0`, Green: `1.0`, Blue: `1.0`
     static let cyanSaturated    = Self.init(red: 0.0,   green: 1.0, blue: 1.0)
-    
+
     /// Red: `0`, Green: `1.0`, Blue: `0`
     static let greenSaturated   = Self.init(red: 0.0,   green: 1.0, blue: 0.0)
-    
+
     /// Red: `1.0`, Green: `0`, Blue: `1.0`
     static let magentaSaturated = Self.init(red: 1.0,   green: 0.0, blue: 1.0)
-    
+
     /// Red: `1.0`, Green: `0`, Blue: `0`
     static let redSaturated     = Self.init(red: 1.0,   green: 0.0, blue: 0.0)
-    
+
     /// Red: `1.0`, Green: `1.0`, Blue: `0`
     static let yellowSaturated  = Self.init(red: 1.0,   green: 1.0, blue: 0.0)
-    
+
     // MARK: Random Colors
-    
+
     /// Returns a random `Color` from the list of predefined colors (as of 2019/10/23), **excluding** `clear`, `primary`, `secondary` and `accentColor`.
     static var random: Color {
         // NOTE: This must be a COMPUTED property! Assigning a value makes this a static variable, which will always be the first color it gets. :)
         Self.presets.randomElement()!
     }
-    
+
     /// Returns a random `Color` from the list of preset colors, **excluding** `black` and `white`.
     static var randomExcludingBlackWhite: Color {
         // NOTE: This must be a COMPUTED property! Assigning a value makes this a static variable, which will always be the first color it gets. :)
@@ -99,16 +107,16 @@ public extension SwiftUI.Color {
             $0 != white && $0 != black
         }.randomElement()!
     }
-    
+
     // MARK: - Constructors
-    
+
     /// Creates a `Color` from a hexadecimal string representing RGB values (e.g. "#RRGGBB", "RRGGBB", "#RGB", or "RGB").
     /// If the input is invalid, `.clear` is returned.
     init(hex: String) {
         var hexString: String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         if  hexString.hasPrefix("#") {
             hexString.removeFirst()  }
-        
+
         var rgbValue: UInt64 = 0
         if  hexString.count == 6, Scanner(string: hexString).scanHexInt64(&rgbValue) {
             let r = Double((rgbValue & 0xFF0000) >> 16) / 255.0
@@ -124,8 +132,9 @@ public extension SwiftUI.Color {
         } else {
             self = .clear }
     }
-    
+
     // MARK: - Modifiers
 
-    
+
 }
+
