@@ -14,7 +14,7 @@ import SwiftUI
 
 /// Presents a list of `Button`s for choosing a `Color`.
 /// May be embedded in any container like `HStack` or `List`.
-public struct ColorChooser: View {
+public struct ColorPicker: View {
     @Binding public var color:     Color
     @Binding public var colorName: String
 
@@ -51,7 +51,7 @@ public struct ColorChooser: View {
                         .frame(maxWidth: .infinity)
                 } else {
                     Capsule(style: .continuous)
-                        .fixedSize(horizontal: false, vertical: true)
+//                        .fixedSize(horizontal: false, vertical: true)
                         .frame(height: size)
                 }
             }
@@ -70,7 +70,7 @@ public struct ColorChooser: View {
 
         ScrollView(.horizontal) {
             HStack(alignment: .center, spacing: 10) {
-                ColorChooser(color: $color,
+                ColorPicker(color: $color,
                              colorName: $colorName,
                              showNames: true)
             }
@@ -78,7 +78,7 @@ public struct ColorChooser: View {
 
         ScrollView(.horizontal) {
             HStack(alignment: .center, spacing: 10) {
-                ColorChooser(color: $color,
+                ColorPicker(color: $color,
                              colorName: $colorName)
             }
         }
@@ -93,7 +93,7 @@ public struct ColorChooser: View {
     @Previewable @State var colorName: String = "Red"
 
     List {
-        ColorChooser(color: $color,
+        ColorPicker(color: $color,
                      colorName: $colorName)
     }
     .padding()
