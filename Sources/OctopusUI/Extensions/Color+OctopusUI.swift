@@ -24,51 +24,41 @@ public extension SwiftUI.Color {
         purple, pink,   brown,
     ]
 
+    static let namesToPresets: [String: Self] = [
+        "black":    .black,
+        "white":    .white,
+        "gray":     .gray,
+        "red":      .red,
+        "orange":   .orange,
+        "yellow":   .yellow,
+        "green":    .green,
+        "mint":     .mint,
+        "teal":     .teal,
+        "cyan":     .cyan,
+        "blue":     .blue,
+        "indigo":   .indigo,
+        "purple":   .purple,
+        "pink":     .pink,
+        "brown":    .brown,
+    ]
 
-    enum Name: String, CaseIterable {
-
-        case black, white,  gray,
-             red,   orange, yellow,
-             green, mint,   teal,
-             cyan,  blue,   indigo,
-             purple,pink,   brown
-
-
-        public var color: Color {
-            switch self {
-            case .black:  return .black
-            case .white:  return .white
-            case .gray:   return .gray
-            case .red:    return .red
-            case .orange: return .orange
-            case .yellow: return .yellow
-            case .green:  return .green
-            case .mint:   return .mint
-            case .teal:   return .teal
-            case .cyan:   return .cyan
-            case .blue:   return .blue
-            case .indigo: return .indigo
-            case .purple: return .purple
-            case .pink:   return .pink
-            case .brown:  return .brown
-            }
-        }
-
-
-        public static var allCasesSorted: [Self] {
-            allCases.sorted { $0.rawValue.lexicographicallyPrecedes($1.rawValue) }
-        }
-
-
-        public init?(string: String) {
-            let lowercased = string.lowercased()
-            if let match = Self.allCases.first(where: { $0.rawValue.lowercased() == lowercased }) {
-                self = match
-            } else {
-                return nil
-            }
-        }
-    }
+    static let presetsToNames: [Self: String] = [
+        .black:    "black",
+        .white:    "white",
+        .gray:     "gray",
+        .red:      "red",
+        .orange:   "orange",
+        .yellow:   "yellow",
+        .green:    "green",
+        .mint:     "mint",
+        .teal:     "teal",
+        .cyan:     "cyan",
+        .blue:     "blue",
+        .indigo:   "indigo",
+        .purple:   "purple",
+        .pink:     "pink",
+        .brown:    "brown",
+    ]
 
 
     // MARK: Sinclair Spectrum
