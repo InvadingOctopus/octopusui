@@ -14,49 +14,65 @@ import SwiftUI
 
 /// Presents a list of `Button`s for choosing a `Color`.
 /// May be embedded in any container like `HStack` or `List`.
-public struct ColorPicker: View {
-    @Binding public var color:     Color
-    @Binding public var colorName: String
+public struct ColorPicker<ShapeView>: View
+where ShapeView: InsettableShape {
+
+    @Binding public var selection: Color
 
     public var showNames:  Bool = false
     public var sorted:     Bool = false
-    public var size:       CGFloat = 24
 
+    @ViewBuilder var shape: ShapeView
+
+    public var colorName: String? {
+        Color.presetsToNames[selection]
+    }
 
     public init(color:      Binding<Color>,
-                colorName:  Binding<String>,
                 showNames:  Bool = false,
                 sorted:     Bool = false,
-                size:       CGFloat = 24)
-    {
-        self._color     = color
-        self._colorName = colorName
+                @ViewBuilder shape: () -> ShapeView) {
+        self._selection     = color
         self.showNames  = showNames
         self.sorted     = sorted
-        self.size       = size
+        self.shape    = shape()
     }
 
 
     public var body: some View {
-        ForEach(sorted ? Color.Name.allCasesSorted : Color.Name.allCases,
-                id: \.rawValue)
-        { name in
+        ForEach(Color.presets,
+                id: \.self)
+        { colorPreset in
             Button {
-                color = name.color
-                colorName = name.rawValue
+                selection = colorPreset
             } label: {
-                if showNames {
-                    Text(name.rawValue.capitalized)
-                        .padding(5)
-                        .frame(maxWidth: .infinity)
-                } else {
-                    Capsule(style: .continuous)
-//                        .fixedSize(horizontal: false, vertical: true)
-                        .frame(height: size)
+                VStack {
+                    shape
+                    if showNames,
+                       let name = Color.presetsToNames[colorPreset] {
+                        Text(name)
+                            .padding(5)
+                            .frame(maxWidth: .infinity)
+                    }
                 }
+                .contentShape(shape) // CHECK: Necessary?
+                .foregroundStyle(colorPreset)
             }
-//            .buttonBorderShape(.capsule)
-            .foregroundStyle(name.color)
+        }
+    }
+}
+
+
+// + Convenience initializer for using a RoundedRectangle as the default shape.
+public extension ColorPicker where ShapeView == Capsule {
+    init(color:      Binding<Color>,
+         showNames:  Bool = false,
+         sorted:     Bool = false)
+    {
+        self.init(color: color,
+                  showNames: showNames,
+                  sorted: sorted) {
+            Capsule(style: .continuous)
         }
     }
 }
@@ -64,22 +80,19 @@ public struct ColorPicker: View {
 
 #Preview {
     @Previewable @State var color: Color = .red
-    @Previewable @State var colorName: String = "Red"
 
     VStack {
 
         ScrollView(.horizontal) {
             HStack(alignment: .center, spacing: 10) {
                 ColorPicker(color: $color,
-                             colorName: $colorName,
-                             showNames: true)
+                            showNames: true)
             }
         }
 
         ScrollView(.horizontal) {
             HStack(alignment: .center, spacing: 10) {
-                ColorPicker(color: $color,
-                             colorName: $colorName)
+                ColorPicker(color: $color)
             }
         }
 
@@ -90,11 +103,9 @@ public struct ColorPicker: View {
 
 #Preview {
     @Previewable @State var color: Color = .red
-    @Previewable @State var colorName: String = "Red"
 
     List {
-        ColorPicker(color: $color,
-                     colorName: $colorName)
+        ColorPicker(color: $color)
     }
     .padding()
 }
