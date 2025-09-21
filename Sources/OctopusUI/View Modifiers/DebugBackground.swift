@@ -14,11 +14,11 @@ public struct DebugBackground: ViewModifier {
     public var color: Color = Color.randomExcludingBlackWhite
     
     public func body(content: Content) -> some View {
-#if DEBUG
+        #if DEBUG
         content.background(color.opacity(0.5))
-#else
+        #else
         content
-#endif
+        #endif
     }
 }
 
