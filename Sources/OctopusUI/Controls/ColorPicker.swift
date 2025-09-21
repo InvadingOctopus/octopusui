@@ -15,7 +15,7 @@ import SwiftUI
 /// Presents a list of `Button`s for choosing a `Color`.
 /// May be embedded in any container like `HStack` or `List`.
 public struct ColorPicker<ShapeView>: View
-where ShapeView: InsettableShape {
+where ShapeView: View & Shape {
 
     @Binding public var selection: Color
 
@@ -50,7 +50,7 @@ where ShapeView: InsettableShape {
                     shape
                     if showNames,
                        let name = Color.presetsToNames[colorPreset] {
-                        Text(name)
+                        Text(name.capitalized)
                             .padding(5)
                             .frame(maxWidth: .infinity)
                     }
@@ -63,7 +63,7 @@ where ShapeView: InsettableShape {
 }
 
 
-// + Convenience initializer for using a RoundedRectangle as the default shape.
+// + Convenience initializer for using a Capsule as the default shape.
 public extension ColorPicker where ShapeView == Capsule {
     init(color:      Binding<Color>,
          showNames:  Bool = false,
@@ -86,7 +86,9 @@ public extension ColorPicker where ShapeView == Capsule {
         ScrollView(.horizontal) {
             HStack(alignment: .center, spacing: 10) {
                 ColorPicker(color: $color,
-                            showNames: true)
+                            showNames: true) {
+                    Circle()
+                }
             }
         }
 
@@ -97,7 +99,6 @@ public extension ColorPicker where ShapeView == Capsule {
         }
 
     }
-    .padding()
 }
 
 
@@ -109,3 +110,4 @@ public extension ColorPicker where ShapeView == Capsule {
     }
     .padding()
 }
+
