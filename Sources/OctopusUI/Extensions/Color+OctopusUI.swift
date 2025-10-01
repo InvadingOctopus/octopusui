@@ -126,5 +126,39 @@ public extension SwiftUI.Color {
     // MARK: - Modifiers
 
 
+    // MARK: - Finance
+
+    static var usesEastAsianFinanceColors: Bool {
+        let locale = Locale.current
+        guard let lang = locale.language.languageCode?.identifier.lowercased() else { return false }
+        switch lang {
+        case "ja", "ko", "zh": // TBD: Include Vietnam?
+            return true
+        default:
+            return false
+        }
+    }
+
+    static var financialNegative: Color {
+        usesEastAsianFinanceColors ? .green : .red
+    }
+
+    static var financialPositive: Color {
+        usesEastAsianFinanceColors ? .red : .green
+    }
+
+
+    static func getMoneyColor<V>(for value: V,
+                                 default defaultColor: Color = Color.gray,
+                                 isZeroPositive: Bool = false) -> Color
+    where V: BinaryFloatingPoint, V.Stride: BinaryFloatingPoint {
+        // NOTE: Don't use `.sign` to check whether a floating point value is negative.
+        switch value {
+        case .zero: return isZeroPositive ? Color.financialPositive : defaultColor
+        case ..<0:  return Color.financialNegative
+        case 0...:  return Color.financialPositive
+        default:    return defaultColor
+        }
+    }
 }
 
