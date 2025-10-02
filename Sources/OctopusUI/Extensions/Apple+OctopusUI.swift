@@ -33,6 +33,35 @@ public extension Date {
     var isInToday: Bool {
         self.timeIntervalSinceNow >= -86400 // (60 * 60 * 24)
     }
+
+
+    static func formattedDateString(for date: Date, fromTemplate template: String = "MMMdd") -> String {
+        let locale = Locale.current
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = locale
+
+        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: template, options: 0, locale: locale)
+        return dateFormatter.string(from: date)
+    }
+
+    func formattedDateString(fromTemplate template: String = "MMMdd") -> String {
+        Self.formattedDateString(for: self, fromTemplate: template)
+    }
+
+
+    static func formattedTimeString(for time: Date, fromTemplate template: String = "Hm") -> String {
+        let locale = Locale.current
+        let timeFormatter = DateFormatter()
+        timeFormatter.locale = locale
+
+        timeFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: template, options: 0, locale: locale)
+        return timeFormatter.string(from: time)
+    }
+
+    func formattedTimeString(fromTemplate template: String = "Hm") -> String {
+        Self.formattedTimeString(for: self, fromTemplate: template)
+    }
+    
 }
 
 
