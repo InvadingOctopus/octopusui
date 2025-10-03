@@ -7,13 +7,35 @@
 //  Copyright © 2023 Invading Octopus. Licensed under Apache License v2.0 (see LICENSE.txt)
 //
 
+// TODO: Move to OctopusCore
+
 import Foundation
 import SwiftUI
 
 
+public extension String {
+    var isTrimmedEmpty: Bool {
+        self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+}
+
+extension String: @retroactive View {
+
+    /// This extension allows a standalone `String` to be used as a `Text` view in a SwiftUI layout.
+    ///
+    /// **Example:**
+    ///
+    ///     VStack {
+    ///         "A string which will be used as a Text view."
+    ///     }
+    public var body: some View {
+        Text(self)
+    }
+
+}
+
+
 public extension Date {
-    // TODO: Move to OctopusCore
-    
     var oneHourAgo: Date {
         self.addingTimeInterval(-3600) // (60 * 60)
     }
@@ -60,22 +82,6 @@ public extension Date {
 
     func formattedTimeString(fromTemplate template: String = "Hm") -> String {
         Self.formattedTimeString(for: self, fromTemplate: template)
-    }
-    
-}
-
-
-extension String: @retroactive View {
-    
-    /// This extension allows a standalone `String` to be used as a `Text` view in a SwiftUI layout.
-    ///
-    /// **Example:**
-    ///
-    ///     VStack {
-    ///         "A string which will be used as a Text view."
-    ///     }
-    public var body: some View {
-        Text(self)
     }
     
 }
