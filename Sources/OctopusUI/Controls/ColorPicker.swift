@@ -14,31 +14,31 @@ import SwiftUI
 
 /// Presents a list of `Button`s for choosing a `Color`.
 /// May be embedded in any container like `HStack` or `List`.
-public struct ColorPicker<ShapeView>: View
-where ShapeView: View & Shape {
+public struct ColorPicker: View {
 
     @Binding public var selection: Color
 
-    public var exclude:    Set<Color> = []
-    public var showNames:  Bool = false
-    public var sorted:     Bool = false
-
-    @ViewBuilder var shape: ShapeView
+    public var exclude:     Set<Color> = []
+    public var icon:        String = "circle.fill"
+    public var showNames:   Bool = false
+    public var sorted:      Bool = false
 
     public var colorName: String? {
         Color.presetsToNames[selection]
     }
 
-    public init(color:      Binding<Color>,
+
+    public init(selection:  Binding<Color>,
                 exclude:    Set<Color> = [],
-                showNames:  Bool = false,
+                icon:       String = "circle.fill",
                 sorted:     Bool = false,
-                @ViewBuilder shape: () -> ShapeView) {
-        self._selection = color
+                showNames:  Bool = false)
+    {
+        self._selection = selection
         self.exclude    = exclude
+        self.icon       = icon
         self.showNames  = showNames
         self.sorted     = sorted
-        self.shape      = shape()
     }
 
 
@@ -49,7 +49,7 @@ where ShapeView: View & Shape {
                     selection = colorPreset
                 } label: {
                     VStack {
-                        shape
+                        Image(systemName: icon)
                         if showNames,
                            let name = Color.presetsToNames[colorPreset] {
                             Text(name.capitalized)
@@ -57,27 +57,9 @@ where ShapeView: View & Shape {
                                 .frame(maxWidth: .infinity)
                         }
                     }
-                    .contentShape(shape) // CHECK: Necessary?
                     .foregroundStyle(colorPreset)
                 }
             }
-        }
-    }
-}
-
-
-// + Convenience initializer for using a Capsule as the default shape.
-public extension ColorPicker where ShapeView == Capsule {
-    init(color:      Binding<Color>,
-         exclude:    Set<Color> = [],
-         showNames:  Bool = false,
-         sorted:     Bool = false)
-    {
-        self.init(color:     color,
-                  exclude:   exclude,
-                  showNames: showNames,
-                  sorted:    sorted) {
-            Capsule(style: .continuous)
         }
     }
 }
@@ -90,16 +72,13 @@ public extension ColorPicker where ShapeView == Capsule {
 
         ScrollView(.horizontal) {
             HStack(alignment: .center, spacing: 10) {
-                ColorPicker(color: $color,
-                            showNames: true) {
-                    Circle()
-                }
+                ColorPicker(selection: $color, showNames: true)
             }
         }
 
         ScrollView(.horizontal) {
             HStack(alignment: .center, spacing: 10) {
-                ColorPicker(color: $color)
+                ColorPicker(selection: $color)
             }
         }
 
@@ -111,7 +90,7 @@ public extension ColorPicker where ShapeView == Capsule {
     @Previewable @State var color: Color = .red
 
     List {
-        ColorPicker(color: $color)
+        ColorPicker(selection: $color)
     }
     .padding()
 }
