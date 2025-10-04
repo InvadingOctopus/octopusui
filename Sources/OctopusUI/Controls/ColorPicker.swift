@@ -19,6 +19,7 @@ where ShapeView: View & Shape {
 
     @Binding public var selection: Color
 
+    public var exclude:    Set<Color> = []
     public var showNames:  Bool = false
     public var sorted:     Bool = false
 
@@ -29,34 +30,36 @@ where ShapeView: View & Shape {
     }
 
     public init(color:      Binding<Color>,
+                exclude:    Set<Color> = [],
                 showNames:  Bool = false,
                 sorted:     Bool = false,
                 @ViewBuilder shape: () -> ShapeView) {
-        self._selection     = color
+        self._selection = color
+        self.exclude    = exclude
         self.showNames  = showNames
         self.sorted     = sorted
-        self.shape    = shape()
+        self.shape      = shape()
     }
 
 
     public var body: some View {
-        ForEach(Color.presets,
-                id: \.self)
-        { colorPreset in
-            Button {
-                selection = colorPreset
-            } label: {
-                VStack {
-                    shape
-                    if showNames,
-                       let name = Color.presetsToNames[colorPreset] {
-                        Text(name.capitalized)
-                            .padding(5)
-                            .frame(maxWidth: .infinity)
+        ForEach(Color.presets, id: \.self) { colorPreset in
+            if !exclude.contains(colorPreset) {
+                Button {
+                    selection = colorPreset
+                } label: {
+                    VStack {
+                        shape
+                        if showNames,
+                           let name = Color.presetsToNames[colorPreset] {
+                            Text(name.capitalized)
+                                .padding(5)
+                                .frame(maxWidth: .infinity)
+                        }
                     }
+                    .contentShape(shape) // CHECK: Necessary?
+                    .foregroundStyle(colorPreset)
                 }
-                .contentShape(shape) // CHECK: Necessary?
-                .foregroundStyle(colorPreset)
             }
         }
     }
@@ -66,12 +69,14 @@ where ShapeView: View & Shape {
 // + Convenience initializer for using a Capsule as the default shape.
 public extension ColorPicker where ShapeView == Capsule {
     init(color:      Binding<Color>,
+         exclude:    Set<Color> = [],
          showNames:  Bool = false,
          sorted:     Bool = false)
     {
-        self.init(color: color,
+        self.init(color:     color,
+                  exclude:   exclude,
                   showNames: showNames,
-                  sorted: sorted) {
+                  sorted:    sorted) {
             Capsule(style: .continuous)
         }
     }
