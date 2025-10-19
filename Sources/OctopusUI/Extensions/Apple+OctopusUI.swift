@@ -53,7 +53,8 @@ public extension Date {
     }
 
     var isInToday: Bool {
-        self.timeIntervalSinceNow >= -86400 // (60 * 60 * 24)
+        Calendar.current.isDate(self, inSameDayAs: Date.now)
+        // FIXED: self.timeIntervalSinceNow >= -86400 // (60 * 60 * 24) // INCORRECT: The previous 24 hours could also be "yesterday"!
     }
 
 
